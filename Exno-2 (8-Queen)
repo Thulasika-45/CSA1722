@@ -1,0 +1,23 @@
+def is_safe(board, row, col):
+    for i in range(col):
+        if board[i] == row or board[i] - i == row - col or board[i] + i == row + col:
+            return False
+    return True
+
+def solve(board, col):
+    if col >= 8:
+        return True
+    for row in range(8):
+        if is_safe(board, row, col):
+            board[col] = row
+            if solve(board, col + 1):
+                return True
+    return False
+
+board = [-1] * 8
+solve(board, 0)
+
+for i in range(8):
+    print((i, board[i]))
+
+
